@@ -1,6 +1,7 @@
-import { X } from "lucide-react";
+import { Star, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Modal } from "../../../components/Modal/Modal";
+import { useBookmarks } from "../../bookmarks/context/BookmarksContext";
 import { fetchWikipediaSummary } from "../api";
 import { getAlmanacEntryKey, useAlmanac, type AlmanacEntryType, type AlmanacEntryTypeName, type WikipediaSummaryType } from "../context/AlmanacContext";
 
@@ -16,10 +17,15 @@ type EntryDetailModalContentPropsType = {
 };
 
 function EntryDetailModalContent({ entry, onClose }: EntryDetailModalContentPropsType) {
+    const { bookmarks, handleToggleBookmark } = useBookmarks();
     const [activeTitle, setActiveTitle] = useState<string | null>(entry.links[0]?.title ?? null);
     const [summary, setSummary] = useState<WikipediaSummaryType | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+
+    const isBookmarked = Boolean(bookmarks[getAlmanacEntryKey(entry)]);
+
+    const handleBookmarkClick = () => handleToggleBookmark(entry);
 
     useEffect(
         function () {
@@ -67,14 +73,24 @@ function EntryDetailModalContent({ entry, onClose }: EntryDetailModalContentProp
                 {summary?.imageUrl && !isLoading && (
                     <img src={summary.imageUrl} alt={summary.title} className="w-full aspect-video object-cover rounded-t-2xl" />
                 )}
-                <button
-                    type="button"
-                    className="absolute top-4 right-4 flex items-center justify-center w-9 h-9 text-subtle bg-card border border-hairline rounded-full transition-colors cursor-pointer hover:text-accent hover:border-accent"
-                    onClick={onClose}
-                    aria-label="Close"
-                >
-                    <X size={16} />
-                </button>
+                <div className="absolute top-4 right-4 flex items-center gap-2">
+                    <button
+                        type="button"
+                        className={`flex items-center justify-center w-9 h-9 bg-card border rounded-full transition-colors cursor-pointer ${isBookmarked ? "text-accent border-accent" : "text-subtle border-hairline hover:text-accent hover:border-accent"}`}
+                        onClick={handleBookmarkClick}
+                        aria-label="Bookmark Entry"
+                    >
+                        <Star size={16} fill={isBookmarked ? "currentColor" : "none"} />
+                    </button>
+                    <button
+                        type="button"
+                        className="flex items-center justify-center w-9 h-9 text-subtle bg-card border border-hairline rounded-full transition-colors cursor-pointer hover:text-accent hover:border-accent"
+                        onClick={onClose}
+                        aria-label="Close"
+                    >
+                        <X size={16} />
+                    </button>
+                </div>
             </div>
             <div className="flex flex-col gap-3 p-8">
                 <header className="flex flex-col gap-3">
