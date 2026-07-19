@@ -16,7 +16,7 @@ export function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="border-t border-hairline">
+        <footer className="mt-auto border-t border-hairline">
             <div className="flex items-start justify-between max-w-350 mx-auto py-10 px-8">
                 <div className="flex flex-col gap-3">
                     <div className="flex flex-col gap-1">
@@ -55,7 +55,7 @@ export function Footer() {
             <div className="border-t border-hairline">
                 <div className="flex items-center justify-between max-w-350 mx-auto py-4 px-8 text-[12px] text-subtle">
                     <p>© {currentYear} Daybook. All rights reserved.</p>
-                    <p>Made for the curious.</p>
+                    <p>Made for the curious, by Balša.</p>
                 </div>
             </div>
         </footer>

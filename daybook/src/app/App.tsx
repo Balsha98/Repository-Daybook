@@ -3,7 +3,7 @@ import { Header } from "../features/layout/Header";
 
 export function App() {
     return (
-        <div className="min-h-screen">
+        <div className="flex flex-col min-h-screen">
             <Header />
             <Footer />
         </div>
