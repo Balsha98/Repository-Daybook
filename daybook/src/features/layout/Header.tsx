@@ -5,10 +5,10 @@ import { ThemeButton } from "../theme/components/ThemeButton";
 
 export function Header() {
     return (
-        <header className="sticky top-0 z-9998 bg-bg/80 backdrop-blur-[8px] border-b border-hairline">
-            <div className="flex items-center justify-between max-w-[1400px] mx-auto py-5 px-8">
+        <header className="sticky top-0 z-9998 bg-bg/80 backdrop-blur-sm border-b border-hairline">
+            <div className="flex items-center justify-between max-w-350 mx-auto py-5 px-8">
                 <div className="flex items-center gap-2">
-                    <div className="flex w-[32px] h-[32px] items-center justify-center bg-accent rounded-md">
+                    <div className="flex w-8 h-8 items-center justify-center bg-accent rounded-md">
                         <BookOpen size={16} strokeWidth={2.4} className="text-on-accent" />
                     </div>
                     <span className="font-bold text-[24px]">Daybook</span>
