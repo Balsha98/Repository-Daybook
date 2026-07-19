@@ -50,6 +50,8 @@ export function BookmarksProvider({ children }: { children: ReactNode }) {
         });
     };
 
+    const handleClearBookmarks = () => setBookmarks({});
+
     useEffect(
         function () {
             localStorage.setItem(BOOKMARKS_STORAGE_KEY, JSON.stringify(bookmarks));
@@ -58,7 +60,17 @@ export function BookmarksProvider({ children }: { children: ReactNode }) {
     );
 
     return (
-        <BookmarksContext.Provider value={{ bookmarks, bookmarksPanelOpen, handleToggleBookmarksPanel, handleToggleBookmark, handleRemoveBookmark }}>
+        //prettier-ignore
+        <BookmarksContext.Provider
+            value={{ 
+                bookmarks, 
+                bookmarksPanelOpen, 
+                handleToggleBookmarksPanel, 
+                handleToggleBookmark, 
+                handleRemoveBookmark, 
+                handleClearBookmarks 
+            }}
+        >
             {children}
         </BookmarksContext.Provider>
     );

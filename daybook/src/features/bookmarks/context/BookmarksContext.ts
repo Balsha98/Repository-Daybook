@@ -9,6 +9,7 @@ export type BookmarksContextType = {
     handleToggleBookmarksPanel: () => void;
     handleToggleBookmark: (item: BookmarkedItemType) => void;
     handleRemoveBookmark: (key: string) => void;
+    handleClearBookmarks: () => void;
 };
 
 export const getBookmarkKey = getAlmanacEntryKey;
