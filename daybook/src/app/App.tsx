@@ -11,7 +11,7 @@ export function App() {
             <DateSelectionModal />
             <ApodDetailModal />
             <Header />
-            <div className="grid grid-cols-1 items-start gap-12 w-full max-w-350 mx-auto py-16 px-8 lg:grid-cols-[1fr_400px]">
+            <div className="grid grid-cols-1 items-start gap-12 w-full max-w-350 mx-auto py-12 px-4 lg:grid-cols-[1fr_400px] xs:px-8 xs:py-16">
                 <AlmanacMain />
                 <Sidebar />
             </div>

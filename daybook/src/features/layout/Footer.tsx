@@ -1,9 +1,9 @@
 import { LuLinkedin } from "react-icons/lu";
-import { TbBrandGithubFilled } from "react-icons/tb";
+import { FiGithub } from "react-icons/fi";
 
 const SOCIALS = [
     { label: "LinkedIn", href: "https://linkedin.com/in/balsha-bazovich", Icon: LuLinkedin },
-    { label: "GitHub", href: "https://github.com/Balsha98", Icon: TbBrandGithubFilled },
+    { label: "GitHub", href: "https://github.com/Balsha98", Icon: FiGithub },
 ];
 
 const SOURCES = [
@@ -17,9 +17,9 @@ export function Footer() {
 
     return (
         <footer className="border-t border-hairline">
-            <div className="flex items-start justify-between max-w-350 mx-auto py-10 px-8">
-                <div className="flex flex-col gap-3">
-                    <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-10 max-w-350 mx-auto py-10 px-4 xs:flex-row xs:items-start xs:justify-between xs:px-8">
+                <div className="flex flex-col items-center gap-3 xs:items-start">
+                    <div className="flex flex-col items-center gap-1 xs:items-start">
                         <span className="text-lg font-bold">Daybook</span>
                         <p className="max-w-xs text-[14px] text-subtle">A personal almanac for the day you're living in.</p>
                     </div>
@@ -39,9 +39,9 @@ export function Footer() {
                         ))}
                     </ul>
                 </div>
-                <div className="flex flex-col items-end gap-2">
+                <div className="flex flex-col items-center gap-2 xs:items-end">
                     <span className="text-[12px] font-bold uppercase text-subtle">Sources</span>
-                    <ul className="flex flex-col items-end gap-1">
+                    <ul className="flex flex-col items-center gap-1 xs:items-end">
                         {SOURCES.map((source) => (
                             <li key={source.label}>
                                 <a href={source.href} rel="noreferrer" className="text-[14px] text-subtle hover:text-accent" target="_blank">
@@ -53,7 +53,7 @@ export function Footer() {
                 </div>
             </div>
             <div className="border-t border-hairline">
-                <div className="flex items-center justify-between max-w-350 mx-auto py-4 px-8 text-[12px] text-subtle">
+                <div className="flex flex-col items-center gap-2 max-w-350 mx-auto py-4 px-4 text-[12px] text-subtle xs:flex-row xs:justify-between xs:px-8">
                     <p>© {currentYear} Daybook. All rights reserved.</p>
                     <p>Made for the curious, by Balša.</p>
                 </div>

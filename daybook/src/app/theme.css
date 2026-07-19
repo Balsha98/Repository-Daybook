@@ -46,6 +46,8 @@
     --shadow-drawer: -8px 0 32px rgb(0, 0, 0, 0.2);
 
     --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    --breakpoint-xs: 36rem;
 }
 
 body {
