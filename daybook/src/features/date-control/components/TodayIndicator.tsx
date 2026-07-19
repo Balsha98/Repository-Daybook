@@ -6,5 +6,5 @@ export function TodayIndicator() {
     // Guard clause.
     if (!isToday) return null;
 
-    return <span className="flex items-center h-9 px-4 text-[14px] font-semibold text-on-accent bg-accent rounded-full hover:brightness-80">Today</span>;
+    return <span className="flex items-center h-9 px-4 text-[14px] font-semibold text-on-accent bg-accent rounded-full">Today</span>;
 }
