@@ -16,7 +16,7 @@ export function Popover({ title, onClose, children }: PopoverPropsType) {
                     <X size={16} />
                 </button>
             </header>
-            <div className="max-h-120 overflow-y-auto">{children}</div>
+            <div className="max-h-80 overflow-y-auto">{children}</div>
         </div>
     );
 }
