@@ -22,6 +22,8 @@ export const formatDateForApod = function (date: Date): string {
     return `${year}-${paddedMonth}-${paddedDay}`;
 };
 
+export const formatDateForOnThisDay = (date: Date): string => `${date.getMonth() + 1}/${date.getDate()}`;
+
 export const getOrdinalSuffix = function (day: number): string {
     const numException = day % 100;
 
