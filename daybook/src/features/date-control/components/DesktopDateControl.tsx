@@ -19,7 +19,7 @@ export function DesktopDateControl() {
     };
 
     return (
-        <div className="absolute top-1/2 left-1/2 hidden items-center gap-3 -translate-x-1/2 -translate-y-1/2 md:flex">
+        <div className="absolute top-1/2 left-1/2 hidden items-center gap-3 -translate-x-1/2 -translate-y-1/2 lg:flex">
             <IconButton onClick={() => handleChangeDay(-1)} aria-label="Previous Day">
                 <ChevronLeft size={16} />
             </IconButton>
@@ -41,6 +41,7 @@ export function DesktopDateControl() {
                 onBlur={handleDateInputBlur}
                 placeholder="MM/DD/YYYY"
                 value={dateInputValue}
+                name="date"
             />
         </div>
     );

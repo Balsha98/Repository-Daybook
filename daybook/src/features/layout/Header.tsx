@@ -1,10 +1,9 @@
 import { BookOpen } from "lucide-react";
+import { DesktopDateControl } from "../date-control/components/DesktopDateControl";
+import { TodayIndicator } from "../date-control/components/TodayIndicator";
+import { MobileDateButton } from "../date-control/components/MobileDateButton";
 import { BookmarkButton } from "../bookmarks/components/BookmarkButton";
 import { BookmarksPanel } from "../bookmarks/components/BookmarksPanel";
-import { DateSelectionModal } from "../date-control/components/DateSelectionModal";
-import { DesktopDateControl } from "../date-control/components/DesktopDateControl";
-import { MobileDateButton } from "../date-control/components/MobileDateButton";
-import { TodayIndicator } from "../date-control/components/TodayIndicator";
 import { ThemeButton } from "../theme/components/ThemeButton";
 
 export function Header() {
@@ -15,7 +14,7 @@ export function Header() {
                     <div className="flex items-center justify-center w-8 h-8 bg-accent rounded-md">
                         <BookOpen size={16} strokeWidth={2.4} className="text-on-accent" />
                     </div>
-                    <span className="hidden text-[24px] font-bold md:inline">Daybook</span>
+                    <span className="hidden text-[24px] font-bold lg:inline">Daybook</span>
                 </div>
                 <DesktopDateControl />
                 <div className="flex items-center gap-2">
@@ -28,7 +27,6 @@ export function Header() {
                     <ThemeButton />
                 </div>
             </div>
-            <DateSelectionModal />
         </header>
     );
 }

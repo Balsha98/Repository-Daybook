@@ -8,7 +8,7 @@ export function MobileDateButton() {
     return (
         <button
             type="button"
-            className="flex items-center h-9 px-4 text-[14px] font-semibold border border-hairline rounded-full hover:text-accent hover:border-accent md:hidden"
+            className="flex items-center h-9 px-4 text-[14px] font-semibold border border-hairline rounded-full hover:text-accent hover:border-accent lg:hidden"
             onClick={handleToggleDateModal}
             aria-label="Choose Date"
         >
