@@ -38,7 +38,7 @@ export function DateSelectionModal() {
                     <IconButton onClick={() => handleChangeDay(-1)} aria-label="Previous Day">
                         <ChevronLeft size={16} />
                     </IconButton>
-                    <div className="flex flex-col items-center">
+                    <div className="flex items-baseline gap-2">
                         <span className="text-lg font-semibold">
                             {WEEKDAY_MONTH_FORMATTER.format(date)} {day}
                             <sup>{getOrdinalSuffix(day)}</sup>

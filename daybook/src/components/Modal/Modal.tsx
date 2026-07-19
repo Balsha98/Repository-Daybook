@@ -12,15 +12,15 @@ export function Modal({ title, onClose, children, className = "" }: ModalPropsTy
     const handleCardClick = (event: MouseEvent) => event.stopPropagation();
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-overlay-modal z-9999" onClick={onClose}>
+        <div className="fixed top-0 left-0 flex items-center justify-center w-full h-screen bg-overlay-modal z-9999" onClick={onClose}>
             <div className={`max-h-[80vh] bg-card shadow-modal border border-hairline rounded-2xl overflow-y-auto ${className}`} onClick={handleCardClick}>
-                <div className="flex items-center justify-between py-6 px-6 border-b border-hairline">
+                <div className="flex items-center justify-between py-4 px-4 border-b border-hairline">
                     <span className="text-base font-bold">{title}</span>
-                    <button type="button" className="text-subtle hover:text-accent" onClick={onClose} aria-label="Close">
+                    <button type="button" className="text-subtle hover:text-accent cursor-pointer" onClick={onClose} aria-label="Close">
                         <X size={16} />
                     </button>
                 </div>
-                <div className="p-6">{children}</div>
+                <div className="py-6 px-4">{children}</div>
             </div>
         </div>
     );
