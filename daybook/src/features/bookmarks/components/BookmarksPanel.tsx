@@ -16,7 +16,11 @@ export function BookmarksPanel() {
                 {bookmarkEntries.length === 0 ? (
                     <p className="py-4 px-4 text-sm text-left text-subtle">Nothing saved yet. Click the bookmark icon on any entry to have it appear here.</p>
                 ) : (
-                    bookmarkEntries.map(([key, item]) => <BookmarkRow key={key} item={item} onRemove={handleRemoveBookmark} />)
+                    <ul className="flex flex-col">
+                        {bookmarkEntries.map(([key, item]) => (
+                            <BookmarkRow key={key} item={item} onRemove={handleRemoveBookmark} />
+                        ))}
+                    </ul>
                 )}
             </Popover>
         </div>
