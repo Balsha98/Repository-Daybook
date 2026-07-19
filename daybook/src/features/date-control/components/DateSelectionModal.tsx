@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { KeyboardEvent } from "react";
-import { IconButton } from "../../../components/IconButton/IconButton";
 import { Modal } from "../../../components/Modal/Modal";
+import { IconButton } from "../../../components/IconButton/IconButton";
 import { getOrdinalSuffix } from "../../../utils/date";
 import { useSelectedDate } from "../context/DateContext";
 
@@ -32,7 +32,7 @@ export function DateSelectionModal() {
     };
 
     return (
-        <Modal title="Choose a Date" className="w-full max-w-[320px]" onClose={handleToggleDateModal}>
+        <Modal title="Choose a Date" onClose={handleToggleDateModal} className="w-full max-w-[320px]">
             <div className="flex flex-col items-center gap-4">
                 <div className="flex w-full items-center justify-between">
                     <IconButton onClick={() => handleChangeDay(-1)} aria-label="Previous Day">
@@ -55,8 +55,9 @@ export function DateSelectionModal() {
                     onChange={(event) => handleDateInputChange(event.target.value)}
                     onKeyDown={handleDateInputKeyDown}
                     onBlur={handleDateInputBlur}
-                    placeholder="MM/DD/YYYY"
                     value={dateInputValue}
+                    placeholder="MM/DD/YYYY"
+                    name="date"
                 />
             </div>
         </Modal>
