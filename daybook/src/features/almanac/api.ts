@@ -35,7 +35,7 @@ export const fetchOnThisDay = async function (date: Date, type: AlmanacEntryType
     const entries = data[responseKey] ?? [];
 
     return entries
-        .map(function (entry): AlmanacEntryType {
+        .map(function (entry): Omit<AlmanacEntryType, "index"> {
             return {
                 type,
                 year: entry.year,
@@ -45,7 +45,8 @@ export const fetchOnThisDay = async function (date: Date, type: AlmanacEntryType
                 }),
             };
         })
-        .sort((a, b) => Number(a.year) - Number(b.year));
+        .sort((a, b) => Number(a.year) - Number(b.year))
+        .map((entry, index) => ({ ...entry, index }));
 };
 
 type WikipediaSummaryApiResponseType = {

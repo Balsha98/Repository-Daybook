@@ -8,6 +8,7 @@ export type AlmanacLinkType = {
 };
 
 export type AlmanacEntryType = {
+    index: number;
     type: AlmanacEntryTypeName;
     year: string;
     description: string;
@@ -31,8 +32,8 @@ export type AlmanacContextType = {
     handleCloseEntryModal: () => void;
 };
 
-export const getAlmanacEntryKey = (entry: Pick<AlmanacEntryType, "type" | "year" | "links" | "description">): string =>
-    `${entry.type}|${entry.year}|${entry.links[0]?.title ?? entry.description}`;
+export const getAlmanacEntryKey = (entry: Pick<AlmanacEntryType, "index" | "type" | "year" | "links" | "description">): string =>
+    `${entry.index}|${entry.type}|${entry.year}|${entry.links[0]?.title ?? entry.description}`;
 
 export const AlmanacContext = createContext<AlmanacContextType | null>(null);
 
