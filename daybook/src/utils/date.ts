@@ -14,6 +14,14 @@ export const formatDateForInput = function (date: Date): string {
     return `${paddedMonth}/${paddedDay}/${year}`;
 };
 
+export const formatDateForApod = function (date: Date): string {
+    const year = date.getFullYear();
+    const paddedMonth = String(date.getMonth() + 1).padStart(2, "0");
+    const paddedDay = String(date.getDate()).padStart(2, "0");
+
+    return `${year}-${paddedMonth}-${paddedDay}`;
+};
+
 export const getOrdinalSuffix = function (day: number): string {
     const numException = day % 100;
 
