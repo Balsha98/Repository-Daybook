@@ -28,11 +28,11 @@ export function ApodProvider({ children }: { children: ReactNode }) {
                     if (cancelled) return;
 
                     setApodData(data);
-                } catch {
+                } catch (e) {
                     // Guard clause.
                     if (cancelled) return;
 
-                    setError("Couldn't load the Astronomy Picture of the Day.");
+                    setError(e instanceof Error ? e.message : "Couldn't load the Astronomy Picture of the Day.");
                 } finally {
                     if (!cancelled) setIsLoading(false);
                 }

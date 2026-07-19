@@ -1,4 +1,4 @@
-import { formatDateForApod } from "../../utils/date";
+import { formatDateForApod, isFutureDate } from "../../utils/date";
 import type { ApodDataType } from "./context/ApodContext";
 
 const APOD_BASE_URL = "https://api.nasa.gov/planetary/apod";
@@ -13,6 +13,9 @@ type ApodApiResponseType = {
 };
 
 export const fetchApod = async function (date: Date): Promise<ApodDataType> {
+    // Guard clause.
+    if (isFutureDate(date)) throw new Error("No APOD available for future dates.");
+
     const params = new URLSearchParams({
         date: formatDateForApod(date),
         thumbs: "true",

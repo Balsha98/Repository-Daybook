@@ -6,6 +6,13 @@ export const isSameDay = (a: Date, b: Date): boolean => a.getFullYear() === b.ge
 
 export const isToday = (date: Date): boolean => isSameDay(date, new Date());
 
+export const isFutureDate = function (date: Date): boolean {
+    const today = new Date();
+    const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+    return date.getTime() > todayMidnight.getTime();
+};
+
 export const formatDateForInput = function (date: Date): string {
     const paddedMonth = String(date.getMonth() + 1).padStart(2, "0");
     const paddedDay = String(date.getDate()).padStart(2, "0");
