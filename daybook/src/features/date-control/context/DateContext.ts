@@ -3,6 +3,7 @@ import { createContext, useContext } from "react";
 export type DateContextType = {
     date: Date;
     dateInputValue: string;
+    dateInputError: string | null;
     isToday: boolean;
     dateModalOpen: boolean;
     handleChangeDay: (amount: number) => void;

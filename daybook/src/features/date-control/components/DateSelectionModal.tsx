@@ -12,6 +12,7 @@ export function DateSelectionModal() {
     const {
         date,
         dateInputValue,
+        dateInputError,
         dateModalOpen,
         handleChangeDay,
         handleDateInputChange,
@@ -49,16 +50,20 @@ export function DateSelectionModal() {
                         <ChevronRight size={16} />
                     </IconButton>
                 </div>
-                <input
-                    type="text"
-                    className="w-full h-10 text-[14px] text-center border border-hairline rounded-lg focus:outline-none focus:border-accent hover:border-accent"
-                    onChange={(event) => handleDateInputChange(event.target.value)}
-                    onKeyDown={handleDateInputKeyDown}
-                    onBlur={handleDateInputBlur}
-                    value={dateInputValue}
-                    placeholder="MM/DD/YYYY"
-                    name="date"
-                />
+                <div className="flex flex-col items-center gap-1 w-full">
+                    <input
+                        type="text"
+                        //prettier-ignore
+                        className={`w-full h-10 text-[14px] text-center border rounded-lg focus:outline-none ${dateInputError ? "border-danger focus:border-danger hover:border-danger" : "border-hairline focus:border-accent hover:border-accent"}`}
+                        onChange={(event) => handleDateInputChange(event.target.value)}
+                        onKeyDown={handleDateInputKeyDown}
+                        onBlur={handleDateInputBlur}
+                        value={dateInputValue}
+                        placeholder="MM/DD/YYYY"
+                        name="date"
+                    />
+                    {dateInputError && <p className="text-xs text-danger">{dateInputError}</p>}
+                </div>
             </div>
         </Modal>
     );
