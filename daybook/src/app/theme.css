@@ -1,0 +1,58 @@
+@import "tailwindcss";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+
+:root {
+    --db-text: rgb(29, 26, 21);
+    --db-subtle: rgb(98, 93, 84);
+    --db-hairline: rgb(220, 215, 207);
+    --db-accent: rgb(58, 85, 130);
+    --db-on-accent: rgb(253, 248, 240);
+
+    --db-bg: rgb(253, 248, 240);
+    --db-hover-bg: rgb(239, 234, 226);
+    --db-card: rgb(255, 255, 249);
+}
+
+[data-theme="dark"] {
+    --db-text: rgb(232, 228, 221);
+    --db-subtle: rgb(163, 158, 148);
+    --db-hairline: rgb(63, 58, 50);
+    --db-accent: rgb(161, 185, 222);
+    --db-on-accent: rgb(30, 26, 19);
+
+    --db-bg: rgb(30, 26, 19);
+    --db-hover-bg: rgb(50, 45, 36);
+    --db-card: rgb(40, 35, 27);
+}
+
+@theme {
+    --color-text: var(--db-text);
+    --color-subtle: var(--db-subtle);
+    --color-hairline: var(--db-hairline);
+    --color-accent: var(--db-accent);
+    --color-on-accent: var(--db-on-accent);
+
+    --color-bg: var(--db-bg);
+    --color-hover-bg: var(--db-hover-bg);
+    --color-card: var(--db-card);
+
+    --color-overlay-drawer: rgb(0, 0, 0, 0.4);
+    --color-overlay-modal: rgb(0, 0, 0, 0.5);
+
+    --shadow-popover: 0 12px 32px rgb(0, 0, 0, 0.15);
+    --shadow-modal: 0 24px 64px rgb(0, 0, 0, 0.25);
+    --shadow-drawer: -8px 0 32px rgb(0, 0, 0, 0.2);
+
+    --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    transition:
+        background 0.3s ease-in-out,
+        color 0.3s ease-in-out;
+}
