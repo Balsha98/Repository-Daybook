@@ -18,7 +18,7 @@ export function ApodDetailModal() {
                 )}
                 <button
                     type="button"
-                    className="absolute top-4 right-4 flex items-center justify-center w-9 h-9 text-subtle bg-card rounded-full cursor-pointer hover:text-accent"
+                    className="absolute top-4 right-4 flex items-center justify-center w-9 h-9 text-subtle bg-card border border-hairline rounded-full transition-colors cursor-pointer hover:text-accent hover:border-accent"
                     onClick={handleToggleApodModal}
                     aria-label="Close"
                 >
