@@ -1,12 +1,7 @@
 import { createContext, useContext } from "react";
+import { getAlmanacEntryKey, type AlmanacEntryType } from "../../almanac/context/AlmanacContext";
 
-export type BookmarkedItemType = {
-    type: "event" | "birth" | "death";
-    year: number;
-    text: string;
-    detail: string;
-    hasImage: boolean;
-};
+export type BookmarkedItemType = AlmanacEntryType;
 
 export type BookmarksContextType = {
     bookmarks: Record<string, BookmarkedItemType>;
@@ -16,7 +11,7 @@ export type BookmarksContextType = {
     handleRemoveBookmark: (key: string) => void;
 };
 
-export const getBookmarkKey = (item: Pick<BookmarkedItemType, "type" | "year" | "text">): string => `${item.type}-${item.year}-${item.text}`;
+export const getBookmarkKey = getAlmanacEntryKey;
 
 export const BookmarksContext = createContext<BookmarksContextType | null>(null);
 
