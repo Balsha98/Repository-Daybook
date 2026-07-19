@@ -1,8 +1,23 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { BookmarksContext, getBookmarkKey, type BookmarkedItemType } from "../context/BookmarksContext";
 
+const BOOKMARKS_STORAGE_KEY = "daybook-bookmarks";
+
+const getInitialBookmarks = function (): Record<string, BookmarkedItemType> {
+    const stored = localStorage.getItem(BOOKMARKS_STORAGE_KEY);
+
+    // Guard clause.
+    if (!stored) return {};
+
+    try {
+        return JSON.parse(stored);
+    } catch {
+        return {};
+    }
+};
+
 export function BookmarksProvider({ children }: { children: ReactNode }) {
-    const [bookmarks, setBookmarks] = useState<Record<string, BookmarkedItemType>>({});
+    const [bookmarks, setBookmarks] = useState<Record<string, BookmarkedItemType>>(getInitialBookmarks);
     const [bookmarksPanelOpen, setBookmarksPanelOpen] = useState(false);
 
     const handleToggleBookmarksPanel = () => setBookmarksPanelOpen((v) => !v);
@@ -11,17 +26,17 @@ export function BookmarksProvider({ children }: { children: ReactNode }) {
         const key = getBookmarkKey(item);
 
         setBookmarks(function (v) {
-            const next = { ...v };
+            const currentBookmarks = { ...v };
 
             // Guard clause.
-            if (next[key]) {
-                delete next[key];
-                return next;
+            if (currentBookmarks[key]) {
+                delete currentBookmarks[key];
+                return currentBookmarks;
             }
 
-            next[key] = item;
+            currentBookmarks[key] = item;
 
-            return next;
+            return currentBookmarks;
         });
     };
 
@@ -34,6 +49,13 @@ export function BookmarksProvider({ children }: { children: ReactNode }) {
             return next;
         });
     };
+
+    useEffect(
+        function () {
+            localStorage.setItem(BOOKMARKS_STORAGE_KEY, JSON.stringify(bookmarks));
+        },
+        [bookmarks],
+    );
 
     return (
         <BookmarksContext.Provider value={{ bookmarks, bookmarksPanelOpen, handleToggleBookmarksPanel, handleToggleBookmark, handleRemoveBookmark }}>
