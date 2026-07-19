@@ -21,7 +21,7 @@ export function AlmanacRow({ entry }: AlmanacRowPropsType) {
     };
 
     return (
-        <li className="flex items-start gap-5 py-4 px-3 border-t border-hairline cursor-pointer hover:bg-hover-bg" onClick={handleRowClick}>
+        <li className="flex items-start justify-between gap-5 py-4 px-3 border-t border-hairline cursor-pointer hover:bg-hover-bg" onClick={handleRowClick}>
             <div className="flex gap-8">
                 <span className="shrink-0 text-md font-bold text-accent">{entry.year}</span>
                 <p className="flex-1 text-md leading-[1.6] line-clamp-2">{entry.description}</p>
