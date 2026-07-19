@@ -30,7 +30,9 @@ export function BookmarksPanel() {
                 }
             >
                 {bookmarkEntries.length === 0 ? (
-                    <p className="py-4 px-4 text-sm text-left text-subtle">Nothing saved yet. Click the bookmark icon on any entry to have it appear here.</p>
+                    <p className="py-4 px-4 text-sm text-left text-subtle">
+                        Nothing saved yet. Click the bookmark icon on any entry to have it appear here, for a future read.
+                    </p>
                 ) : (
                     <ul className="flex flex-col">
                         {bookmarkEntries.map(([key, item]) => (
