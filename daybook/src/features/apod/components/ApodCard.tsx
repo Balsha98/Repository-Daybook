@@ -7,10 +7,10 @@ export function ApodCard() {
     const cardImageSrc = apodData?.mediaType === "video" ? apodData.thumbnailUrl : apodData?.url;
 
     return (
-        <div className="p-5 border border-hairline rounded-xl">
+        <div className="p-5 border border-hairline rounded-xl cursor-pointer hover:bg-hover-bg" onClick={handleToggleApodModal}>
             <div className="flex items-center justify-between pb-3">
                 <span className="text-xs font-bold tracking-wide uppercase text-subtle">NASA Picture of the Day</span>
-                <button type="button" className="text-subtle cursor-pointer hover:text-accent" onClick={handleToggleApodModal} aria-label="Open Full View">
+                <button type="button" className="text-subtle cursor-pointer hover:text-accent" aria-label="Open Full View">
                     <ExternalLink size={16} />
                 </button>
             </div>
