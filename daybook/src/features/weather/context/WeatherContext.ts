@@ -31,7 +31,7 @@ export type WeatherContextType = {
     location: LocationDataType | null;
     weatherData: WeatherDataType | null;
     forecast: ForecastDayType[];
-    tempUnit: TempUnitType;
+    tempUnit: TempUnitType | null;
     handleSetTempUnit: (unit: TempUnitType) => void;
 };
 

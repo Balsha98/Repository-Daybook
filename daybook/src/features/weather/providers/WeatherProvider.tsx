@@ -8,7 +8,7 @@ export function WeatherProvider({ children }: { children: ReactNode }) {
     const [location, setLocation] = useState<LocationDataType | null>(null);
     const [weatherData, setWeatherData] = useState<WeatherDataType | null>(null);
     const [forecast, setForecast] = useState<ForecastDayType[]>([]);
-    const [tempUnit, setTempUnit] = useState<TempUnitType>("F");
+    const [tempUnit, setTempUnit] = useState<TempUnitType | null>(null);
 
     const handleSetTempUnit = (unit: TempUnitType) => setTempUnit(unit);
 
@@ -37,6 +37,7 @@ export function WeatherProvider({ children }: { children: ReactNode }) {
                 if (cancelled) return;
 
                 setLocation(locationData);
+                setTempUnit(locationData.country === "US" ? "F" : "C");
                 setWeatherData(currentWeather);
                 setForecast(forecastData);
             } catch (e) {
