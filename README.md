@@ -1,8 +1,8 @@
 # Daybook - Modernized Almanac
 
-A modernized personal almanac web app. For any date you pick, Daybook shows historical events, notable births, and notable deaths that happened "on this day," alongside a sidebar with the current weather (plus a 5-day forecast) and NASA's Astronomy Picture of the Day (APOD). Entries can be bookmarked for later, and the whole app supports light/dark theming.
+A modernized almanac web application. For any date you pick, Daybook shows historical events, notable births, and notable deaths that happened "on this day," alongside a sidebar with the current weather (plus a 5-day forecast) and NASA's Astronomy Picture of the Day (APOD). Entries can be bookmarked for later, and the whole app supports light/dark theming.
 
-The app itself lives in [`daybook/`](daybook).
+The application itself lives inside of [`daybook/`](daybook).
 
 ## Demo
 
@@ -27,6 +27,12 @@ A live version is deployed at [daybookalmanac.vercel.app](https://daybookalmanac
 - **LucideReact** + **ReactIcons** - Icon Set
 - **ESLint** - Linting
 
+## Why Vite & Tailwind
+
+**Vite** was chosen over a framework like Next.js or Remix mainly because of the shape of this application: there's no backend, no multiple pages/routing, and no server-side rendering to speak of; just a single static page that calls a handful of external APIs from the client. A framework built around routing, server components, and API routes would have been overkill for that; Vite, however, is a good build tool. It also supports a TypeScript codebase with no additional setup, which is ultimately a lot easier to read through and understand than Vanilla JS.
+
+**Tailwind CSS v4** was chosen for how well it fits a component-based architecture: styles live directly alongside the elements they affect, so there's no separate stylesheet to keep track of, no class-naming scheme to invent, and no specificity conflicts between unrelated components. Tailwind's latest version drops the old `tailwind.config.ts` in favor of defining variables as CSS custom properties inside of `@theme` (see `src/app/theme.css`), which made it straightforward to build this project's light/dark theming system; swapping an entire palette is just toggling which set of `--db-*` variables is active, with Tailwind's utility classes picking up the change automatically.
+
 ## APIs Used
 
 | API                                                                                         | Used For                                        | Auth               |
@@ -45,7 +51,7 @@ A live version is deployed at [daybookalmanac.vercel.app](https://daybookalmanac
 **Prerequisites:** Node.js & npm
 
 ```bash
-# Move into the app directory.
+# Move into the application directory.
 cd daybook
 
 # Install dependencies.
@@ -71,7 +77,7 @@ npm run lint     # Run ESLint.
 An alternative to the npm-based setup above, for developing inside a container. Requires [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
 ```bash
-# Move into the app directory.
+# Move into the application directory.
 cd daybook
 
 # Copy the env template and fill in your API keys (see below).
@@ -81,7 +87,7 @@ cp .env.example .env
 docker compose up --build
 ```
 
-Then open [http://localhost:5173](http://localhost:5173). Source files are bind-mounted into the container, so edits made on the host are picked up live (HMR is enabled). On subsequent runs, `--build` isn't needed unless `package.json` or the `Dockerfile` itself changed - plain `docker compose up` reuses the existing image.
+Then open [http://localhost:5173](http://localhost:5173). Source files are bind-mounted into the container, so edits made on the host are picked up live (HMR is enabled). On subsequent runs, `--build` isn't needed unless `package.json` or the `Dockerfile` itself changed; plain `docker compose up` reuses the existing image.
 
 This setup is dev-only; it isn't used for the Vercel deployment described under Deployment below.
 
@@ -97,7 +103,7 @@ VITE_OPENWEATHER_API_KEY=
 - `VITE_NASA_API_KEY` - get a free key at [api.nasa.gov](https://api.nasa.gov/).
 - `VITE_OPENWEATHER_API_KEY` - get a free key at [openweathermap.org/api](https://openweathermap.org/api).
 
-Both are prefixed with `VITE_` so Vite inlines them into the client bundle - keep in mind they're visible in the shipped JS once deployed, so don't reuse a key elsewhere that needs to stay private.
+Both are prefixed with `VITE_` so Vite inlines them into the client bundle.
 
 ## Testing
 
@@ -113,51 +119,52 @@ Test files are excluded from the production build's type-check (`tsconfig.app.js
 
 ## Project Structure
 
-Feature-based architecture - each domain owns its own components, context, provider, and API calls, rather than one global store.
+Feature-Based Architecture - each domain owns its own components, context, provider, and API calls, rather than one global store.
 
 ```
 Repository-Daybook/
 ├── daybook/
 │   └── src/
-│       ├── app/                     # App shell (App.tsx), global CSS/theme tokens.
+│       ├── app/                     # Application shell (App.tsx), global CSS/theme tokens.
 │       ├── components/              # Generic, reusable UI with no domain knowledge.
-│       │   ├── Modal/
 │       │   ├── IconButton/
+│       │   ├── Modal/
 │       │   └── Popover/
 │       ├── features/
 │       │   ├── almanac/             # On-this-day events/births/deaths, entry detail modal.
 │       │   ├── apod/                # NASA Astronomy Picture of the Day.
-│       │   ├── weather/             # Current weather + 5-day forecast.
 │       │   ├── bookmarks/           # Bookmarking + localStorage persistence.
 │       │   ├── date-control/        # Date navigation (desktop nav, mobile modal).
-│       │   ├── theme/               # Light/dark theme toggle.
+│       │   ├── layout/              # Header, Footer, Sidebar.
 │       │   ├── loading/             # Full-screen splash shown until initial data is ready.
-│       │   └── layout/              # Header, Footer, Sidebar.
+│       │   ├── theme/               # Light/dark theme toggle.
+│       │   └── weather/             # Current weather + 5-day forecast.
 │       │       └── <feature>/
 │       │           ├── components/
 │       │           ├── context/     # React context + hook (once a feature needs one).
 │       │           ├── providers/   # The provider component backing that context.
 │       │           └── api.ts       # External data fetching for that feature.
+│       ├── test/                    # Vitest setup (jest-dom matchers, DOM cleanup).
 │       ├── utils/                   # Framework-agnostic utilities (date parsing/formatting).
-│       └── main.tsx                 # Providers composition + app entry point.
+│       └── main.tsx                 # Providers composition + application entry point.
 └── README.md
 ```
 
 ## Architecture
 
-No prop-drilling and no single global store - state is split per feature, and each feature that needs shared state exposes it through its own **Context** and **Provider** pair instead of threading props down through several component levels.
+No prop-drilling and no single global store; state is split per feature, and each feature that needs shared state exposes it through its own **Context** and **Provider** pair instead of threading props down through several component levels.
 
 - **`context/<Feature>Context.ts`** - defines the context's TypeScript type, creates the `Context` object, and exports a `use<Feature>()` hook that reads it (throwing a clear error if a component tries to use it outside its provider). Components call this hook directly wherever they need that feature's data, no matter how deep they are in the tree.
 - **`providers/<Feature>Provider.tsx`** - the component that actually owns the `useState`/`useEffect` calls, computes the context value, and renders `<Context.Provider>`. This is the only place a feature's state actually lives.
 - **`api.ts`** - a feature's external data fetching lives here, kept separate from the provider. It's responsible only for calling the external APIs and mapping the raw response into the feature's own typed shape; the provider calls into it (usually from inside a `useEffect`) and owns the resulting loading/error/data state.
 
-All providers are composed once in `main.tsx`, wrapping the whole app. This keeps each feature self-contained and easy to reason about in isolation - the `weather` feature, for example, has no knowledge of `almanac`'s state, and a component several levels deep (like `WeatherCard`) can read exactly the data it needs via `useWeather()` without every component in between having to pass it along.
+All providers are composed once in `main.tsx`, wrapping the whole application. This keeps each feature self-contained and easy to reason about in isolation; the `weather` feature, for example, has no knowledge of `almanac`'s state, and a component several levels deep (like `WeatherCard`) can read exactly the data it needs via `useWeather()` without every component in between having to pass it along.
 
 ## Deployment
 
 The production build (`npm run build`, from `daybook/`) outputs a static `dist/` folder, deployable to any static host. This project is deployed on [Vercel](https://vercel.com/); if you fork it there, make sure to:
 
-- Set the project's Root Directory to `daybook` (since the app isn't at the repo root).
+- Set the project's Root Directory to `daybook` (since the application isn't at the repo root).
 - Add `VITE_NASA_API_KEY` and `VITE_OPENWEATHER_API_KEY` under Environment Variables.
 
 ## Nice-To-Haves / Possible Future Additions
