@@ -97,7 +97,7 @@ function EntryDetailModalContent({ entry, onClose }: EntryDetailModalContentProp
                     <span className="text-xs font-bold uppercase tracking-wide text-accent">
                         {ENTRY_TYPE_LABELS[entry.type]} · {entry.year}
                     </span>
-                    <h2 className="text-2xl font-bold">{entry.description}</h2>
+                    <h2 className="text-xl font-bold sm:text-2xl">{entry.description}</h2>
                 </header>
                 {entry.links.length > 1 && (
                     <div className="relative">

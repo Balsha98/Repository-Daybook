@@ -10,7 +10,7 @@ export function Sidebar() {
         <>
             {sidebarOpen && <div className="fixed inset-0 bg-overlay-drawer z-9998 lg:hidden" onClick={handleToggleSidebar} />}
             <aside
-                className={`fixed top-0 ${sidebarOpen ? "right-0" : "-right-180"} w-120 h-screen p-6 bg-bg shadow-drawer transition-[right] duration-300 ease-in-out overflow-y-auto z-9998 lg:sticky lg:top-28 lg:right-auto lg:w-auto lg:h-auto lg:p-0 lg:bg-transparent lg:shadow-none lg:transition-none lg:z-auto`}
+                className={`fixed top-0 ${sidebarOpen ? "right-0" : "-right-180"} w-full h-screen p-6 bg-bg shadow-drawer transition-[right] duration-300 ease-in-out overflow-y-auto z-9998 lg:sticky lg:top-28 lg:right-auto lg:w-auto lg:h-auto lg:p-0 lg:bg-transparent lg:shadow-none lg:transition-none lg:z-auto sm:w-120`}
             >
                 <div className="mb-4 flex items-end justify-between lg:hidden">
                     <span className="text-lg font-bold">Weather & APOD</span>

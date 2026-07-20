@@ -1,5 +1,9 @@
+import { useState } from "react";
+import { LayoutList } from "lucide-react";
 import { useSelectedDate } from "../../date-control/context/DateContext";
 import { MobileSidebarButton } from "../../layout/components/MobileSidebarButton";
+import { IconButton } from "../../../components/IconButton/IconButton";
+import { Popover } from "../../../components/Popover/Popover";
 import { getOrdinalSuffix } from "../../../utils/date";
 import { useAlmanac } from "../context/AlmanacContext";
 import { AlmanacSection } from "./AlmanacSection";
@@ -16,9 +20,17 @@ export function AlmanacMain() {
     const { date } = useSelectedDate();
     const { isLoading, error, events, births, deaths } = useAlmanac();
 
+    const [navPopoverOpen, setNavPopoverOpen] = useState(false);
+
     const day = date.getDate();
 
-    const handleScrollToSection = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const handleToggleNavPopover = () => setNavPopoverOpen((v) => !v);
+
+    const handleScrollToSection = function (id: string) {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+
+        setNavPopoverOpen(false);
+    };
 
     return (
         <main className="flex flex-col gap-14">
@@ -31,16 +43,42 @@ export function AlmanacMain() {
                     </h1>
                 </div>
                 <div className="flex items-center gap-2">
-                    {ALMANAC_NAV_SECTIONS.map((section) => (
-                        <button
-                            key={section.id}
-                            type="button"
-                            className="py-1 px-3 text-xs font-semibold border border-hairline rounded-full cursor-pointer hover:text-accent hover:border-accent"
-                            onClick={() => handleScrollToSection(section.id)}
-                        >
-                            {section.label}
-                        </button>
-                    ))}
+                    <div className="hidden items-center gap-2 sm:flex">
+                        {ALMANAC_NAV_SECTIONS.map((section) => (
+                            <button
+                                key={section.id}
+                                type="button"
+                                className="py-1 px-3 text-xs font-semibold border border-hairline rounded-full cursor-pointer hover:text-accent hover:border-accent"
+                                onClick={() => handleScrollToSection(section.id)}
+                            >
+                                {section.label}
+                            </button>
+                        ))}
+                    </div>
+                    <div className="relative sm:hidden">
+                        <IconButton active={navPopoverOpen} onClick={handleToggleNavPopover} aria-label="Toggle Section Navigation">
+                            <LayoutList size={16} />
+                        </IconButton>
+                        {navPopoverOpen && (
+                            <div className="absolute top-12 -right-2 w-48">
+                                <Popover title="Sections" onClose={handleToggleNavPopover}>
+                                    <ul className="flex flex-col gap-2 p-3">
+                                        {ALMANAC_NAV_SECTIONS.map((section) => (
+                                            <li key={section.id}>
+                                                <button
+                                                    type="button"
+                                                    className="w-full py-1 px-3 text-xs font-semibold border border-hairline rounded-full cursor-pointer hover:text-accent hover:border-accent"
+                                                    onClick={() => handleScrollToSection(section.id)}
+                                                >
+                                                    {section.label}
+                                                </button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </Popover>
+                            </div>
+                        )}
+                    </div>
                     <MobileSidebarButton />
                 </div>
             </div>
