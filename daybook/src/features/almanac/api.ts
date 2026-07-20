@@ -35,6 +35,7 @@ export const fetchOnThisDay = async function (date: Date, type: AlmanacEntryType
     const entries = data[responseKey] ?? [];
 
     return entries
+        .filter((entry) => !Number.isNaN(Number(entry.year)))
         .map(function (entry): Omit<AlmanacEntryType, "index"> {
             return {
                 type,
