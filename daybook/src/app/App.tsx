@@ -1,3 +1,4 @@
+import { LoadingScreen } from "../features/loading/components/LoadingScreen";
 import { DateSelectionModal } from "../features/date-control/components/DateSelectionModal";
 import { EntryDetailModal } from "../features/almanac/components/EntryDetailModal";
 import { ApodDetailModal } from "../features/apod/components/ApodDetailModal";
@@ -9,6 +10,7 @@ import { Footer } from "../features/layout/Footer";
 export function App() {
     return (
         <div className="min-h-screen">
+            <LoadingScreen />
             <DateSelectionModal />
             <EntryDetailModal />
             <ApodDetailModal />
