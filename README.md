@@ -29,9 +29,9 @@ A live version is deployed at [daybookalmanac.vercel.app](https://daybookalmanac
 
 ## Why Vite & Tailwind
 
-**Vite** was chosen over a framework like Next.js or Remix mainly because of the shape of this application: there's no backend, no multiple pages/routing, and no server-side rendering to speak of; just a single static page that calls a handful of external APIs from the client. A framework built around routing, server components, and API routes would have been overkill for that; Vite, however, is a good build tool. It also supports a TypeScript codebase with no additional setup, which is ultimately a lot easier to read through and understand than Vanilla JS.
+**Vite** was chosen over a framework like Next.js or Remix mainly because of the shape of this application: there's no backend, no multiple pages/routing, and no server-side rendering; just a single static page that calls a handful of external APIs from the client. A framework built around routing, server components, and API routes would have been overkill for that; Vite, however, is a good build tool. It also supports a TypeScript codebase with no additional setup, which is ultimately a lot easier to read through and understand than Vanilla JS.
 
-**Tailwind CSS v4** was chosen for how well it fits a component-based architecture: styles live directly alongside the elements they affect, so there's no separate stylesheet to keep track of, no class-naming scheme to invent, and no specificity conflicts between unrelated components. Tailwind's latest version drops the old `tailwind.config.ts` in favor of defining variables as CSS custom properties inside of `@theme` (see `src/app/theme.css`), which made it straightforward to build this project's light/dark theming system; swapping an entire palette is just toggling which set of `--db-*` variables is active, with Tailwind's utility classes picking up the change automatically.
+**Tailwind** was chosen for how well it fits a component-based architecture: styles live directly alongside the elements they affect, so there's no separate stylesheet to keep track of, no class-naming scheme to invent, and no specificity conflicts between unrelated components. Tailwind's latest version drops defines variables as CSS custom properties inside of `@theme` (see `src/app/theme.css`), which, for example, made it straightforward to build this project's light/dark theming system; swapping an entire palette is just toggling which set of `--db-*` variables is active, with Tailwind's utility classes picking up the change automatically.
 
 ## APIs Used
 
@@ -172,6 +172,7 @@ The production build (`npm run build`, from `daybook/`) outputs a static `dist/`
 - **Additional Accent Color Themes** - the design tokens already support swapping the accent color; only one is wired up today.
 - **Remembering the °F/°C Choice** - the temperature unit isn't persisted between visits (unlike theme/bookmarks, which are).
 - **Bookmarking APOD Entries** - currently only almanac entries can be bookmarked; extending this to APOD would be a nice-to-have.
+- **Pagination for Almanac Entries** - Almanac sections currently render every fetched entry at once; it generally is a long list of data rows.
 - **AI-Generated Entry Art** - sending an entry's data to an AI image model to generate a picture of the event/person.
 
 ## Design
