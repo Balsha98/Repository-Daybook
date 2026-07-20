@@ -2,13 +2,14 @@ import { getAlmanacEntryKey, type AlmanacEntryType } from "../context/AlmanacCon
 import { AlmanacRow } from "./AlmanacRow";
 
 export type AlmanacSectionPropsType = {
+    id: string;
     title: string;
     entries: AlmanacEntryType[];
 };
 
-export function AlmanacSection({ title, entries }: AlmanacSectionPropsType) {
+export function AlmanacSection({ id, title, entries }: AlmanacSectionPropsType) {
     return (
-        <section className="flex flex-col gap-2">
+        <section id={id} className="flex flex-col gap-2 scroll-mt-24">
             <h2 className="text-lg font-bold uppercase tracking-wide text-subtle">{title}</h2>
             <ul className="flex flex-col">
                 {entries.map((entry) => (

@@ -6,11 +6,19 @@ import { AlmanacSection } from "./AlmanacSection";
 
 const MONTH_FORMATTER = new Intl.DateTimeFormat("en-US", { month: "long" });
 
+const ALMANAC_NAV_SECTIONS = [
+    { id: "events", label: "Events" },
+    { id: "births", label: "Births" },
+    { id: "deaths", label: "Deaths" },
+];
+
 export function AlmanacMain() {
     const { date } = useSelectedDate();
     const { isLoading, error, events, births, deaths } = useAlmanac();
 
     const day = date.getDate();
+
+    const handleScrollToSection = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
     return (
         <main className="flex flex-col gap-14">
@@ -22,15 +30,27 @@ export function AlmanacMain() {
                         <sup className="text-lg">{getOrdinalSuffix(day)}</sup>
                     </h1>
                 </div>
-                <MobileSidebarButton />
+                <div className="flex items-center gap-2">
+                    {ALMANAC_NAV_SECTIONS.map((section) => (
+                        <button
+                            key={section.id}
+                            type="button"
+                            className="py-1 px-3 text-xs font-semibold border border-hairline rounded-full cursor-pointer hover:text-accent hover:border-accent"
+                            onClick={() => handleScrollToSection(section.id)}
+                        >
+                            {section.label}
+                        </button>
+                    ))}
+                    <MobileSidebarButton />
+                </div>
             </div>
             {isLoading && <p className="text-sm text-subtle">Loading almanac entries…</p>}
             {error && !isLoading && <p className="text-sm text-subtle">{error}</p>}
             {!isLoading && !error && (
                 <div className="flex flex-col gap-12">
-                    <AlmanacSection title="Notable Events" entries={events} />
-                    <AlmanacSection title="Notable Births" entries={births} />
-                    <AlmanacSection title="Notable Deaths" entries={deaths} />
+                    <AlmanacSection id="events" title="Notable Events" entries={events} />
+                    <AlmanacSection id="births" title="Notable Births" entries={births} />
+                    <AlmanacSection id="deaths" title="Notable Deaths" entries={deaths} />
                 </div>
             )}
         </main>
