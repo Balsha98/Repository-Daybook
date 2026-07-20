@@ -3,7 +3,7 @@ import { useWeather, type TempUnitType } from "../context/WeatherContext";
 
 const WEEKDAY_FORMATTER = new Intl.DateTimeFormat("en-US", { weekday: "short" });
 
-const formatTemp = (fahrenheit: number, unit: TempUnitType): string => `${Math.round(unit === "C" ? ((fahrenheit - 32) * 5) / 9 : fahrenheit)}°`;
+const formatTemp = (fahrenheit: number, unit: TempUnitType | null): string => `${Math.round(unit === "C" ? ((fahrenheit - 32) * 5) / 9 : fahrenheit)}°`;
 
 export function WeatherCard() {
     const { isLoading, error, location, weatherData, forecast, tempUnit, handleSetTempUnit } = useWeather();
