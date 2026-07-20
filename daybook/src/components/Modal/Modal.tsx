@@ -20,7 +20,7 @@ export function Modal({ title, onClose, children, className = "" }: ModalPropsTy
     }, []);
 
     return (
-        <div className="fixed top-0 left-0 flex items-center justify-center w-full h-screen bg-overlay-modal z-9999" onClick={onClose}>
+        <div className="fixed top-0 left-0 flex items-center justify-center w-full h-screen px-4 bg-overlay-modal z-9999" onClick={onClose}>
             <div className={`max-h-[80vh] bg-card shadow-modal border border-hairline rounded-2xl overflow-y-auto ${className}`} onClick={handleCardClick}>
                 {title ? (
                     <>
