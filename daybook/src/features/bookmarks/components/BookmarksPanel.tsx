@@ -11,7 +11,7 @@ export function BookmarksPanel() {
     const bookmarkEntries = Object.entries(bookmarks);
 
     return (
-        <div className="absolute top-12 -right-6 w-80 sm:-right-2 sm:w-100">
+        <div className="absolute top-16 right-1/2 w-[calc(100%-2rem)] translate-x-1/2 xs:top-12 xs:-right-2 xs:w-100 xs:translate-x-0">
             <Popover
                 title="Saved Bookmarks"
                 onClose={handleToggleBookmarksPanel}

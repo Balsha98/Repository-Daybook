@@ -22,7 +22,7 @@ export function Header() {
                 <div className="flex items-center gap-2">
                     <TodayIndicator />
                     <MobileDateButton />
-                    <div className="relative">
+                    <div className="static xs:relative">
                         <BookmarkButton />
                         <BookmarksPanel />
                     </div>

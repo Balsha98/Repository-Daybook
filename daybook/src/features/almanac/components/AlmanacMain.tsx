@@ -62,12 +62,12 @@ export function AlmanacMain() {
                         {navPopoverOpen && (
                             <div className="absolute top-12 -right-2 w-48">
                                 <Popover title="Sections" onClose={handleToggleNavPopover}>
-                                    <ul className="flex flex-col gap-2 p-3">
+                                    <ul className="flex flex-col">
                                         {ALMANAC_NAV_SECTIONS.map((section) => (
-                                            <li key={section.id}>
+                                            <li key={section.id} className="border-b last:border-b-0 border-hairline">
                                                 <button
                                                     type="button"
-                                                    className="w-full py-1 px-3 text-xs font-semibold border border-hairline rounded-full cursor-pointer hover:text-accent hover:border-accent"
+                                                    className="w-full py-3 px-4 text-xs font-semibold text-center cursor-pointer hover:bg-hover-bg"
                                                     onClick={() => handleScrollToSection(section.id)}
                                                 >
                                                     {section.label}
