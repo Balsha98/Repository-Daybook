@@ -167,7 +167,7 @@ The production build (`npm run build`, from `daybook/`) outputs a static `dist/`
 - Set the project's Root Directory to `daybook` (since the application isn't at the repo root).
 - Add `VITE_NASA_API_KEY` and `VITE_OPENWEATHER_API_KEY` under Environment Variables.
 
-## Nice-To-Haves / Possible Future Additions
+## Nice-To-Haves
 
 - **Additional Accent Color Themes** - the design tokens already support swapping the accent color; only one is wired up today.
 - **Remembering the °F/°C Choice** - the temperature unit isn't persisted between visits (unlike theme/bookmarks, which are).
