@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { fetchCurrentWeather, fetchForecast, fetchLocation, getCurrentPosition } from "../api";
-import { WeatherContext, type ForecastDayType, type LocationDataType, type WeatherDataType } from "../context/WeatherContext";
+import { WeatherContext, type ForecastDayType, type LocationDataType, type TempUnitType, type WeatherDataType } from "../context/WeatherContext";
 
 export function WeatherProvider({ children }: { children: ReactNode }) {
     const [isLoading, setIsLoading] = useState(true);
@@ -8,6 +8,9 @@ export function WeatherProvider({ children }: { children: ReactNode }) {
     const [location, setLocation] = useState<LocationDataType | null>(null);
     const [weatherData, setWeatherData] = useState<WeatherDataType | null>(null);
     const [forecast, setForecast] = useState<ForecastDayType[]>([]);
+    const [tempUnit, setTempUnit] = useState<TempUnitType>("F");
+
+    const handleSetTempUnit = (unit: TempUnitType) => setTempUnit(unit);
 
     useEffect(function () {
         let cancelled = false;
@@ -53,5 +56,7 @@ export function WeatherProvider({ children }: { children: ReactNode }) {
         };
     }, []);
 
-    return <WeatherContext.Provider value={{ isLoading, error, weatherData, forecast, location }}>{children}</WeatherContext.Provider>;
+    return (
+        <WeatherContext.Provider value={{ isLoading, error, weatherData, forecast, location, tempUnit, handleSetTempUnit }}>{children}</WeatherContext.Provider>
+    );
 }

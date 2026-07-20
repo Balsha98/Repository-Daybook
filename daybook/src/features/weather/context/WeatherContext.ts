@@ -1,5 +1,7 @@
 import { createContext, useContext } from "react";
 
+export type TempUnitType = "F" | "C";
+
 export type WeatherDataType = {
     temp: number;
     feelsLike: number;
@@ -29,6 +31,8 @@ export type WeatherContextType = {
     location: LocationDataType | null;
     weatherData: WeatherDataType | null;
     forecast: ForecastDayType[];
+    tempUnit: TempUnitType;
+    handleSetTempUnit: (unit: TempUnitType) => void;
 };
 
 export const WeatherContext = createContext<WeatherContextType | null>(null);
