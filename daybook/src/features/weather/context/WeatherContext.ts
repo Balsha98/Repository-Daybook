@@ -2,7 +2,6 @@ import { createContext, useContext } from "react";
 
 export type WeatherDataType = {
     temp: number;
-    name: string;
     feelsLike: number;
     description: string;
     tempMin: number;
@@ -10,6 +9,11 @@ export type WeatherDataType = {
     humidity: number;
     windSpeed: number;
     icon: string;
+};
+
+export type LocationDataType = {
+    name: string;
+    country: string;
 };
 
 export type ForecastDayType = {
@@ -22,6 +26,7 @@ export type ForecastDayType = {
 export type WeatherContextType = {
     isLoading: boolean;
     error: string | null;
+    location: LocationDataType | null;
     weatherData: WeatherDataType | null;
     forecast: ForecastDayType[];
 };

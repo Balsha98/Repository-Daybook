@@ -4,13 +4,17 @@ import { useWeather } from "../context/WeatherContext";
 const WEEKDAY_FORMATTER = new Intl.DateTimeFormat("en-US", { weekday: "short" });
 
 export function WeatherCard() {
-    const { isLoading, error, weatherData, forecast } = useWeather();
+    const { isLoading, error, location, weatherData, forecast } = useWeather();
 
     return (
         <div className="p-5 border border-hairline rounded-xl">
             <header className="flex flex-col gap-1">
                 <span className="text-xs font-bold tracking-wide uppercase text-subtle">Weather</span>
-                {weatherData && !isLoading && !error && <span className="text-md font-semibold">{weatherData.name}</span>}
+                {location && !isLoading && !error && (
+                    <span className="text-md font-semibold">
+                        {location.name}, {location.country}
+                    </span>
+                )}
             </header>
             {error && !isLoading && <p className="pt-3 text-sm text-subtle">{error}</p>}
             {isLoading && <div className="h-24 mt-3 bg-hover-bg rounded-lg animate-pulse" />}

@@ -1,10 +1,11 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { fetchCurrentWeather, fetchForecast, getCurrentPosition } from "../api";
-import { WeatherContext, type ForecastDayType, type WeatherDataType } from "../context/WeatherContext";
+import { fetchCurrentWeather, fetchForecast, fetchLocation, getCurrentPosition } from "../api";
+import { WeatherContext, type ForecastDayType, type LocationDataType, type WeatherDataType } from "../context/WeatherContext";
 
 export function WeatherProvider({ children }: { children: ReactNode }) {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [location, setLocation] = useState<LocationDataType | null>(null);
     const [weatherData, setWeatherData] = useState<WeatherDataType | null>(null);
     const [forecast, setForecast] = useState<ForecastDayType[]>([]);
 
@@ -23,13 +24,18 @@ export function WeatherProvider({ children }: { children: ReactNode }) {
 
                 const { latitude, longitude } = position.coords;
 
-                const [currentWeather, forecastDays] = await Promise.all([fetchCurrentWeather(latitude, longitude), fetchForecast(latitude, longitude)]);
+                const [locationData, currentWeather, forecastData] = await Promise.all([
+                    fetchLocation(latitude, longitude),
+                    fetchCurrentWeather(latitude, longitude),
+                    fetchForecast(latitude, longitude),
+                ]);
 
                 // Guard clause.
                 if (cancelled) return;
 
+                setLocation(locationData);
                 setWeatherData(currentWeather);
-                setForecast(forecastDays);
+                setForecast(forecastData);
             } catch (e) {
                 // Guard clause.
                 if (cancelled) return;
@@ -47,5 +53,5 @@ export function WeatherProvider({ children }: { children: ReactNode }) {
         };
     }, []);
 
-    return <WeatherContext.Provider value={{ isLoading, error, weatherData, forecast }}>{children}</WeatherContext.Provider>;
+    return <WeatherContext.Provider value={{ isLoading, error, weatherData, forecast, location }}>{children}</WeatherContext.Provider>;
 }

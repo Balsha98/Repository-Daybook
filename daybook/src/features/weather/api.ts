@@ -1,11 +1,11 @@
-import type { ForecastDayType, WeatherDataType } from "./context/WeatherContext";
+import type { ForecastDayType, LocationDataType, WeatherDataType } from "./context/WeatherContext";
 
 const WEATHER_BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 const FORECAST_BASE_URL = "https://api.openweathermap.org/data/2.5/forecast";
+const REVERSE_GEOCODE_BASE_URL = "https://api.openweathermap.org/geo/1.0/reverse";
 const WEATHER_ICON_BASE_URL = "https://openweathermap.org/payload/api/media/file";
 
 type CurrentWeatherApiResponseType = {
-    name: string;
     main: { temp: number; feels_like: number; temp_min: number; temp_max: number; humidity: number };
     weather: { description: string; icon: string }[];
     wind: { speed: number };
@@ -21,7 +21,13 @@ type ForecastApiResponseType = {
     list: ForecastEntryType[];
 };
 
-const capitalizeFirstLetter = (value: string): string => value[0].toUpperCase() + value.slice(1);
+type ReverseGeocodeApiResponseType = { name: string; country: string }[];
+
+const capitalizeFirstLetter = function (value: string): string {
+    const uppercased = value.split(" ").map((v) => v[0].toUpperCase() + v.slice(1));
+
+    return uppercased.join(" ");
+};
 
 export const buildWeatherIconUrl = (icon: string): string => `${WEATHER_ICON_BASE_URL}/${icon}.png`;
 
@@ -56,7 +62,6 @@ export const fetchCurrentWeather = async function (lat: number, lon: number): Pr
     const data: CurrentWeatherApiResponseType = await response.json();
 
     return {
-        name: data.name,
         temp: data.main.temp,
         feelsLike: data.main.feels_like,
         description: capitalizeFirstLetter(data.weather[0].description),
@@ -99,4 +104,28 @@ export const fetchForecast = async function (lat: number, lon: number): Promise<
                 icon: entry.weather[0].icon,
             };
         });
+};
+
+export const fetchLocation = async function (lat: number, lon: number): Promise<LocationDataType> {
+    const params = new URLSearchParams({
+        lat: String(lat),
+        lon: String(lon),
+        limit: "1",
+        appid: import.meta.env.VITE_OPENWEATHER_API_KEY,
+    });
+
+    const response = await fetch(`${REVERSE_GEOCODE_BASE_URL}?${params.toString()}`);
+
+    // Guard clause.
+    if (!response.ok) throw new Error("Failed to fetch the location name.");
+
+    const data: ReverseGeocodeApiResponseType = await response.json();
+
+    // Guard clause.
+    if (!data[0]) throw new Error("No location found for these coordinates.");
+
+    return {
+        name: data[0].name,
+        country: data[0].country,
+    };
 };
