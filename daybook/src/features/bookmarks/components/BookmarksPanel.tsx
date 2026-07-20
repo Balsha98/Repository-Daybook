@@ -1,4 +1,3 @@
-import { Trash2 } from "lucide-react";
 import { Popover } from "../../../components/Popover/Popover";
 import { useBookmarks } from "../context/BookmarksContext";
 import { BookmarkRow } from "./BookmarkRow";
@@ -20,11 +19,11 @@ export function BookmarksPanel() {
                     bookmarkEntries.length > 0 && (
                         <button
                             type="button"
-                            className="text-subtle cursor-pointer hover:text-accent"
+                            className="py-1 px-3 text-xs font-semibold border border-hairline rounded-full cursor-pointer hover:text-accent hover:border-accent"
                             onClick={handleClearBookmarks}
                             aria-label="Delete All Bookmarks"
                         >
-                            <Trash2 size={16} />
+                            Clear
                         </button>
                     )
                 }

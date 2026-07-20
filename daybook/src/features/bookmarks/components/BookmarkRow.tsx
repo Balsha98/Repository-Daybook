@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import type { MouseEvent } from "react";
 import { useAlmanac } from "../../almanac/context/AlmanacContext";
 import { getBookmarkKey, type BookmarkedItemType } from "../context/BookmarksContext";
@@ -29,7 +29,7 @@ export function BookmarkRow({ item, onRemove }: BookmarkRowPropsType) {
                 <p className="flex-1 text-sm truncate">{item.description}</p>
             </div>
             <button type="button" onClick={handleRemoveClick} className="shrink-0 text-subtle cursor-pointer hover:text-accent" aria-label="Remove Bookmark">
-                <X size={14} />
+                <Trash2 size={14} />
             </button>
         </li>
     );
