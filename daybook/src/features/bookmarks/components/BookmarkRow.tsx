@@ -20,7 +20,10 @@ export function BookmarkRow({ item, onRemove }: BookmarkRowPropsType) {
     };
 
     return (
-        <li className="flex items-center gap-3 py-3 px-4 border-b last:border-b-0 border-hairline cursor-pointer hover:bg-hover-bg" onClick={handleRowClick}>
+        <li
+            className="flex items-center justify-between gap-3 py-3 px-4 border-b last:border-b-0 border-hairline cursor-pointer hover:bg-hover-bg"
+            onClick={handleRowClick}
+        >
             <div className="flex items-center gap-2 truncate">
                 <span className="inline-block text-sm font-bold text-accent">{item.year}</span>
                 <p className="flex-1 text-sm truncate">{item.description}</p>
