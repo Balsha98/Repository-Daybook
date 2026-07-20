@@ -8,7 +8,7 @@
         "allowArbitraryExtensions": true,
         "skipLibCheck": true,
 
-        /* Bundler mode */
+        /* Bundler Mode */
         "moduleResolution": "bundler",
         "allowImportingTsExtensions": true,
         "verbatimModuleSyntax": true,
@@ -22,5 +22,6 @@
         "erasableSyntaxOnly": true,
         "noFallthroughCasesInSwitch": true
     },
-    "include": ["src"]
+    "include": ["src"],
+    "exclude": ["**/*.test.ts", "**/*.test.tsx", "src/test"]
 }
