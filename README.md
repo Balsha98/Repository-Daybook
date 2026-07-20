@@ -99,6 +99,18 @@ VITE_OPENWEATHER_API_KEY=
 
 Both are prefixed with `VITE_` so Vite inlines them into the client bundle - keep in mind they're visible in the shipped JS once deployed, so don't reuse a key elsewhere that needs to stay private.
 
+## Testing
+
+Tests run on [Vitest](https://vitest.dev/), with [React Testing Library](https://testing-library.com/react) for rendering/querying components and [MSW](https://mswjs.io/) for mocking network requests. Test files are colocated next to what they test (e.g. `DateProvider.test.tsx` sits beside `DateProvider.tsx`) rather than mirrored into a separate `tests/` folder.
+
+```bash
+npm test           # Watch mode - re-runs affected tests as files change.
+# or
+npm test -- run    # Run once and exit (e.g. for CI).
+```
+
+Test files are excluded from the production build's type-check (`tsconfig.app.json`) and instead covered by their own `tsconfig.test.json`, so `npm run build` never depends on test-only packages being installed.
+
 ## Project Structure
 
 Feature-based architecture - each domain owns its own components, context, provider, and API calls, rather than one global store.
