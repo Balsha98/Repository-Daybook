@@ -1,4 +1,5 @@
 import { X } from "lucide-react";
+import { WeatherCard } from "../weather/components/WeatherCard";
 import { ApodCard } from "../apod/components/ApodCard";
 import { useSidebar } from "./context/SidebarContext";
 
@@ -23,7 +24,7 @@ export function Sidebar() {
                     </button>
                 </div>
                 <div className="flex flex-col gap-4">
-                    {/* WeatherCard goes here once the weather feature is built. */}
+                    <WeatherCard />
                     <ApodCard />
                 </div>
             </aside>

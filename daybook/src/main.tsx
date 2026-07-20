@@ -5,6 +5,7 @@ import { BookmarksProvider } from "./features/bookmarks/providers/BookmarksProvi
 import { DateProvider } from "./features/date-control/providers/DateProvider";
 import { AlmanacProvider } from "./features/almanac/providers/AlmanacProvider";
 import { ApodProvider } from "./features/apod/providers/ApodProvider";
+import { WeatherProvider } from "./features/weather/providers/WeatherProvider";
 import { SidebarProvider } from "./features/layout/providers/SidebarProvider";
 import { App } from "./app/App";
 import "./app/theme.css";
@@ -16,9 +17,11 @@ createRoot(document.getElementById("root")!).render(
                 <DateProvider>
                     <AlmanacProvider>
                         <ApodProvider>
-                            <SidebarProvider>
-                                <App />
-                            </SidebarProvider>
+                            <WeatherProvider>
+                                <SidebarProvider>
+                                    <App />
+                                </SidebarProvider>
+                            </WeatherProvider>
                         </ApodProvider>
                     </AlmanacProvider>
                 </DateProvider>
