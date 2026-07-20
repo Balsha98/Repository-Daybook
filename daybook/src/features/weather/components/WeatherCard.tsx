@@ -27,22 +27,24 @@ export function WeatherCard() {
                         </div>
                     )}
                 </div>
-                <div className="flex items-center bg-hover-bg rounded-full">
-                    <button
-                        type="button"
-                        className={`py-0.5 px-2 text-xs font-semibold rounded-full transition-colors cursor-pointer ${tempUnit === "F" ? "text-on-accent bg-accent" : "text-subtle hover:text-accent"}`}
-                        onClick={() => handleSetTempUnit("F")}
-                    >
-                        °F
-                    </button>
-                    <button
-                        type="button"
-                        className={`py-0.5 px-2 text-xs font-semibold rounded-full transition-colors cursor-pointer ${tempUnit === "C" ? "text-on-accent bg-accent" : "text-subtle hover:text-accent"}`}
-                        onClick={() => handleSetTempUnit("C")}
-                    >
-                        °C
-                    </button>
-                </div>
+                {!error && (
+                    <div className="flex items-center bg-hover-bg rounded-full">
+                        <button
+                            type="button"
+                            className={`py-0.5 px-2 text-xs font-semibold rounded-full transition-colors cursor-pointer ${tempUnit === "F" ? "text-on-accent bg-accent" : "text-subtle hover:text-accent"}`}
+                            onClick={() => handleSetTempUnit("F")}
+                        >
+                            °F
+                        </button>
+                        <button
+                            type="button"
+                            className={`py-0.5 px-2 text-xs font-semibold rounded-full transition-colors cursor-pointer ${tempUnit === "C" ? "text-on-accent bg-accent" : "text-subtle hover:text-accent"}`}
+                            onClick={() => handleSetTempUnit("C")}
+                        >
+                            °C
+                        </button>
+                    </div>
+                )}
             </header>
             {error && !isLoading && <p className="pt-3 text-sm text-subtle">{error}</p>}
             {isLoading && <div className="h-24 mt-3 bg-hover-bg rounded-lg animate-pulse" />}
