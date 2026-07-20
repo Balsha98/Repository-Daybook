@@ -10,6 +10,7 @@ const SOURCES = [
     { label: "NASA APOD API", href: "https://api.nasa.gov/" },
     { label: "OpenWeatherMap API", href: "https://api.openweathermap.org/" },
     { label: "ByAbbe On This Day API", href: "https://byabbe.se/on-this-day/" },
+    { label: "Country Flags API", href: "https://flagsapi.com/" },
 ];
 
 export function Footer() {

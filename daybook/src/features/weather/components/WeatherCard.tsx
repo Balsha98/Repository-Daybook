@@ -1,4 +1,4 @@
-import { buildWeatherIconUrl } from "../api";
+import { buildFlagUrl, buildWeatherIconUrl } from "../api";
 import { useWeather, type TempUnitType } from "../context/WeatherContext";
 
 const WEEKDAY_FORMATTER = new Intl.DateTimeFormat("en-US", { weekday: "short" });
@@ -14,9 +14,17 @@ export function WeatherCard() {
                 <div className="flex flex-col gap-1">
                     <span className="text-xs font-bold tracking-wide uppercase text-subtle">Weather</span>
                     {location && !isLoading && !error && (
-                        <span className="text-md font-semibold">
-                            {location.name}, {location.country}
-                        </span>
+                        <div className="flex items-center gap-1">
+                            <span className="text-md font-semibold">{location.name}</span>
+                            <img
+                                className="w-6"
+                                src={buildFlagUrl(location.country)}
+                                onError={(event) => {
+                                    event.currentTarget.style.display = "none";
+                                }}
+                                alt={location.country}
+                            />
+                        </div>
                     )}
                 </div>
                 <div className="flex items-center bg-hover-bg rounded-full">

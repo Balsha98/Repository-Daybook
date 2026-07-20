@@ -4,6 +4,7 @@ const WEATHER_BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 const FORECAST_BASE_URL = "https://api.openweathermap.org/data/2.5/forecast";
 const REVERSE_GEOCODE_BASE_URL = "https://api.openweathermap.org/geo/1.0/reverse";
 const WEATHER_ICON_BASE_URL = "https://openweathermap.org/payload/api/media/file";
+const FLAG_BASE_URL = "https://flagsapi.com";
 
 type CurrentWeatherApiResponseType = {
     main: { temp: number; feels_like: number; temp_min: number; temp_max: number; humidity: number };
@@ -30,6 +31,8 @@ const capitalizeFirstLetter = function (value: string): string {
 };
 
 export const buildWeatherIconUrl = (icon: string): string => `${WEATHER_ICON_BASE_URL}/${icon}.png`;
+
+export const buildFlagUrl = (country: string): string => `${FLAG_BASE_URL}/${country}/shiny/64.png`;
 
 export const getCurrentPosition = function (): Promise<GeolocationPosition> {
     return new Promise(function (resolve, reject) {
