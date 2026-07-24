@@ -1,8 +1,6 @@
 # Daybook - Modernized Almanac
 
-A modernized almanac web application. For any date you pick, Daybook shows historical events, notable births, and notable deaths that happened "on this day," alongside a sidebar with the current weather (plus a 5-day forecast) and NASA's Astronomy Picture of the Day (APOD). Entries can be bookmarked for later, and the whole app supports light/dark theming.
-
-The application itself lives inside of [`daybook/`](daybook).
+A modernized almanac web application. For any date you pick, Daybook shows historical events, notable births, and notable deaths that happened "on this day," alongside a sidebar with the current weather (plus a 5-day forecast) and NASA's Astronomy Picture of the Day (APOD). Entries can be bookmarked for later, and the application supports light/dark theming.
 
 ## Demo
 
@@ -190,4 +188,4 @@ If you enjoyed my work or have any questions, feel free to reach out!
 
 ## License
 
-Personal project - no license has been set.
+Personal project - all rights reserved.
